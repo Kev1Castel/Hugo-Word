@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<commande>
+    <commande_fermer>fermer</commande_fermer>
+    <commande_aide>aide</commande_aide>
+    <commande_jouer>jouer</commande_jouer>
+    <commande_arreter>stop</commande_arreter>
+</commande>

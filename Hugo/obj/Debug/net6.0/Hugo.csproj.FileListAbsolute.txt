@@ -1,0 +1,15 @@
+D:\projet\C#\Hugo\bin\Debug\net6.0\Hugo.exe
+D:\projet\C#\Hugo\bin\Debug\net6.0\Hugo.deps.json
+D:\projet\C#\Hugo\bin\Debug\net6.0\Hugo.runtimeconfig.json
+D:\projet\C#\Hugo\bin\Debug\net6.0\Hugo.dll
+D:\projet\C#\Hugo\bin\Debug\net6.0\ref\Hugo.dll
+D:\projet\C#\Hugo\bin\Debug\net6.0\Hugo.pdb
+D:\projet\C#\Hugo\obj\Debug\net6.0\Hugo.csproj.AssemblyReference.cache
+D:\projet\C#\Hugo\obj\Debug\net6.0\Hugo.GeneratedMSBuildEditorConfig.editorconfig
+D:\projet\C#\Hugo\obj\Debug\net6.0\Hugo.AssemblyInfoInputs.cache
+D:\projet\C#\Hugo\obj\Debug\net6.0\Hugo.AssemblyInfo.cs
+D:\projet\C#\Hugo\obj\Debug\net6.0\Hugo.csproj.CoreCompileInputs.cache
+D:\projet\C#\Hugo\obj\Debug\net6.0\Hugo.dll
+D:\projet\C#\Hugo\obj\Debug\net6.0\ref\Hugo.dll
+D:\projet\C#\Hugo\obj\Debug\net6.0\Hugo.pdb
+D:\projet\C#\Hugo\obj\Debug\net6.0\Hugo.genruntimeconfig.cache
