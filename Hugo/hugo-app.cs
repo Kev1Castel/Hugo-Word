@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿// using Internal;
+using System;
+using System.Globalization;
 using System.Xml.Linq;
 using System.ComponentModel.Design;
 using System.Data;
@@ -289,7 +291,7 @@ class Program
         */
 
         Console.Clear();
-        Console.Title = "Hugo.exe **";
+        Console.Title = "Adrien.exe **";
         string command = "ouvert";
 
         List<string> listCommand = new List<string>();
@@ -301,89 +303,93 @@ class Program
 
         List<string> lTest = new List<string>();
         quizz.GetDictWord(file.ParseXMLFileToList(path:environnementPath+@"\ressource\word.xml", xPath:@"word/*"), file.ParseXMLFileToList(path:environnementPath+@"\ressource\word.xml", xPath:@"word/*", true));
-        
-        while (command != listCommand[0])
+        if (listCommand.Count != 0)
         {
-            string commandAdd = listCommand[4];
-            string commandHelp = listCommand[1];
-            bool isGamingCommand = (command == listCommand[2] || command == listCommand[3]);
-            ShowIntroductionMessage(environnementPath);
-
-            command = Console.ReadLine();
-
-            if (isGamingCommand) //listCommand.Contains(command)
+            while (command != listCommand[0])
             {
-                //Console Commande
-                Console.ForegroundColor = ConsoleColor.Blue;
-                if (command == listCommand[2])
+                string commandAdd = listCommand[4];
+                string commandHelp = listCommand[1];
+                bool isGamingCommand = (command == listCommand[2] || command == listCommand[3]);
+                ShowIntroductionMessage(environnementPath);
+
+                command = Console.ReadLine();
+
+                if (isGamingCommand) //listCommand.Contains(command)
                 {
-                    quizz.StartGame();
-                    
-                } 
-            } else if (quizz.doesUserPlay){
-                //Play Commande
-                quizz.CheckAnswer(command);
-                if (command == listCommand[3]) {
-                    quizz.StopGame();
-                } else if (command == quizz.answer) {
-                    Console.WriteLine("Bravo!");
-                } else {
-                    Console.WriteLine("Oops!");
-                }
-                Console.ReadLine();
-                // Console.Clear();
-            } else if (command == listCommand[2]) {
-                quizz.StartGame();
-            }   else if (command.Contains(commandHelp)) {
-                string prefix_command = "--";
-                if (command.Any(prefix_command.Contains))
-                {
-                    string childCommand = GetArgument(command);
-                    if (childCommand != null)
+                    //Console Commande
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    if (command == listCommand[2])
                     {
-                        if (childCommand == listCommand[4])
-                        {
-                            ShowCommandTargetHelp(childCommand, listCommand);
-                        }
+                        quizz.StartGame();
+                        
+                    } 
+                } else if (quizz.doesUserPlay){
+                    //Play Commande
+                    quizz.CheckAnswer(command);
+                    if (command == listCommand[3]) {
+                        quizz.StopGame();
+                    } else if (command == quizz.answer) {
+                        Console.WriteLine("Bravo!");
+                    } else {
+                        Console.WriteLine("Oops!");
                     }
-                } else {
-                    ShowCommandGlobalHelp(listCommand);
-                }
+                    Console.ReadLine();
+                    // Console.Clear();
+                } else if (command == listCommand[2]) {
+                    quizz.StartGame();
+                }   else if (command.Contains(commandHelp)) {
+                    string prefix_command = "--";
+                    if (command.Any(prefix_command.Contains))
+                    {
+                        string childCommand = GetArgument(command);
+                        if (childCommand != null)
+                        {
+                            if (childCommand == listCommand[4])
+                            {
+                                ShowCommandTargetHelp(childCommand, listCommand);
+                            }
+                        }
+                    } else {
+                        ShowCommandGlobalHelp(listCommand);
+                    }
 
-                // if (command == listCommand[1])
-                // {
-                //     // listCommand.ForEach(Console.WriteLine);
-                //     ShowCommandHelp(listCommand);
+                    // if (command == listCommand[1])
+                    // {
+                    //     // listCommand.ForEach(Console.WriteLine);
+                    //     ShowCommandHelp(listCommand);
 
-            
-            } else if (command.Contains(listCommand[5])){
-                List<string> word = GetWord(command);
-                quizz.RemoveWord(word[1]);
-                Console.ReadKey();
-            } else if (command.Contains(commandAdd)) {
-                List<string> word = GetWord(command);
-                word.ForEach(Console.WriteLine);
-                Console.WriteLine(word.Count);
-                if (word.Count >= 2)
-                {
-                    file.AddWord(word[0], word[1],@"ressource\word.xml");
-                    Console.WriteLine(word);
-                } else {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Tentative d'ajout d'élément impossible... élément vide!");
+                
+                } else if (command.Contains(listCommand[5])){
+                    List<string> word = GetWord(command);
+                    quizz.RemoveWord(word[1]);
                     Console.ReadKey();
+                } else if (command.Contains(commandAdd)) {
+                    List<string> word = GetWord(command);
+                    word.ForEach(Console.WriteLine);
+                    Console.WriteLine(word.Count);
+                    if (word.Count >= 2)
+                    {
+                        file.AddWord(word[0], word[1],@"ressource\word.xml");
+                        Console.WriteLine(word);
+                    } else {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Tentative d'ajout d'élément impossible... élément vide!");
+                        Console.ReadKey();
+                    }
+                } else if (command.Length > 0 & command != listCommand[0]) {    
+                    //Console Commande Error               
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Désolé mais la commande semble incorrecte! \r\nSi le probléme persiste taper 'aide'\r\nAppuyer sur une touche pour continuer.");
+                    Console.ReadKey();
+            } else {
+                    Console.Clear();
                 }
-            } else if (command.Length > 0 & command != listCommand[0]) {    
-                //Console Commande Error               
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Désolé mais la commande semble incorrecte! \r\nSi le probléme persiste taper 'aide'\r\nAppuyer sur une touche pour continuer.");
-                Console.ReadKey();
-        } else {
-                Console.Clear();
             }
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Fermeture de l'app.");
+        } else {
+            Console.WriteLine("Désolé, mais les commandes n'ont pas chargaient...");
         }
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("Fermeture de l'app.");
     }
 
     static string GetArgument(string cmd)
