@@ -4,4 +4,6 @@
     <commande_aide>aide</commande_aide>
     <commande_jouer>jouer</commande_jouer>
     <commande_arreter>stop</commande_arreter>
+	<commande_ajouter>ajouter</commande_ajouter>
+    <commande_remove>remove</commande_remove>
 </commande>
