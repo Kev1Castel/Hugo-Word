@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Microsoft.Win32.SafeHandles;
 using System.Data.Common;
 using System;
@@ -87,6 +88,77 @@ namespace Hugo
             commandeInformation["isParenthesesNumberCorrect"] = (counterCloseParenthese == 1 && counterOpenParenthese == 1);
             commandeInformation["isArgumentNotEmpty"] = (argument.Length > 0);
 
+        }
+
+        public string Get_Argument(string cmd)
+        {
+            /*
+                Get the argument in the string c for returning 
+                    the argument as string a (argument)
+
+                ARG:
+                    string cmd
+            */
+            string a = null;
+            if (cmd.Contains("option"))
+                a = cmd.Replace("option", "");
+            a = a.Replace(" ", "");
+            return a;
+        }
+
+        public bool Set_Arg_Is_An_Numeric_Character(string arg)
+        {
+            /*
+                Check if the argument (arg) is numeric
+
+                ARG:
+                    string arg wich is the argument of command typed
+                        by the user.
+
+                RETURN:
+                    arg
+            */
+            bool is_numeric = true;
+            List<string> listNumericCharacterAuthorized = new List<string>();
+            listNumericCharacterAuthorized = Set_ListNumericCharacterAuthorized();
+            foreach(char c in arg)
+            {
+                string string_c = c.ToString();
+                if (!listNumericCharacterAuthorized.Contains(string_c))
+                {
+                    is_numeric = false;
+                } 
+
+            }
+            return is_numeric;
+        }
+
+        private List<string> Set_ListNumericCharacterAuthorized()
+        {
+            /*
+                Define listNumericCharacterAuthorized
+            */
+            List<string> listC = new List<string>();
+            for(int i = 0; i<10; i++)
+            {
+                listC.Add(i.ToString());
+            }
+            return listC;
+        }
+
+        public int Convert_Argument_To_Int(string arg)
+        {
+            /*
+                Convert string argument to int argument
+
+                ARG:
+                    string arg
+                
+                RETURN:
+                    int arg
+            */
+            int a = ushort.Parse(arg);
+            return a;
         }
 
         private bool GetDoesWrongCharacterWasFoundt(string character)

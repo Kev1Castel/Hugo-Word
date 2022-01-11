@@ -10,7 +10,9 @@ namespace Hugo
         This class is inherit from the Program class.
         This class is for working  with XmlDocument 
         */
-        public List<string> ParseXMLFileToList(string path=null, string xPath=null, bool replaceIterTextByName = false) //public
+
+        private Interface interfaceConsole = new Interface();
+        public List<string> ParseXMLFileToList(string path, string xPath, bool replaceIterTextByName = false) //public
         {
             /*
             This method load and get data from xml file (XmlDocument).
@@ -25,13 +27,18 @@ namespace Hugo
             Return listFile<string> = Get XML DATA (Itername OR Name)
             */
             List<string> listFile = new List<string>();
+            int maxNode;
+            int countNode = 0;
             try
             {
                 XmlDocument file = new XmlDocument();
                 file.Load(path);
                 XmlNodeList XList = file.SelectNodes(xPath);
+                maxNode = XList.Count;
                 foreach (XmlNode child in XList)
                 {
+                    countNode++;
+                    interfaceConsole.LoadingLine(maxNode:maxNode, counterNode:countNode);
                     if (replaceIterTextByName){
                         listFile.Add(child.Name);
                     } else {
@@ -114,6 +121,7 @@ namespace Hugo
                 file.Load(@"ressource\word.xml");
                 XmlNodeList listAllNodes = file.SelectNodes("word/*");
                 ReWriteXml(listAllNodes, pathRoot:pathRoot, wordToDelete);
+                
             }
         }
 

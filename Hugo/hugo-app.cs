@@ -1,15 +1,12 @@
 ﻿using Microsoft.Win32.SafeHandles;
-// using System.Xml.Xsl.Runtime;
 using System.Threading.Tasks.Dataflow;
 using System.Runtime.InteropServices;
-// using Internal;
 using System;
 using System.Globalization;
 using System.Xml.Linq;
 using System.ComponentModel.Design;
 using System.Data;
 using System.IO;
-
 
 
 namespace Hugo
@@ -24,7 +21,7 @@ namespace Hugo
         static Quizz quizz = new Quizz();
         static Command commandClass = new Command();
         
-        // static Dictionary<string, string> dictWord = new Dictionary<string, string>();
+        static Dictionary<string, int> dictUserGameData = new Dictionary<string, int>();
 
         static void Main(string[] args)
         {
@@ -33,12 +30,14 @@ namespace Hugo
             */
 
             Console.Clear();
-            Console.Title = "Adrien.exe **";
+            Console.Title = "Hugo.exe **";
             string command = "ouvert";
 
             List<string> listCommand = new List<string>();
             string environnementPath = Directory.GetCurrentDirectory();
 
+            Set_DictGameUserData();
+            
             LocalFile file = new LocalFile();
             listCommand = file.ParseXMLFileToList(path:environnementPath+@"\ressource\commandes.xml", xPath:@"commande/*");
             listWordNodeName = file.ParseXMLFileToList(path:environnementPath+@"\ressource\word.xml", xPath:@"word/*", replaceIterTextByName:true);
@@ -52,6 +51,7 @@ namespace Hugo
                     string commandAdd = listCommand[4];
                     string commandHelp = listCommand[1];
                     bool isGamingCommand = (command == listCommand[2] || command == listCommand[3]);
+
                     ShowIntroductionMessage(environnementPath);
 
                     command = Console.ReadLine();
@@ -64,20 +64,66 @@ namespace Hugo
                         if (command == listCommand[2])
                         {
                             quizz.StartGame();
+                            dictUserGameData["index_question"] = dictUserGameData["maximum_question"];
                             
-                        } 
+                        } else if (command == listCommand[3] && quizz.doesUserPlay) {
+                            Console.ForegroundColor = ConsoleColor.DarkGreen;
+                            Console.WriteLine("Arrêt de la partie... Bravo!");
+                            Console.ReadKey();
+                            quizz.StopGame();
+                        }
+                    } else if (command.Contains(listCommand[6])) {
+                        string arg_string = commandClass.Get_Argument(command);
+                        bool is_num;
+                        if (command.Length > 6)
+                        {
+                            is_num = commandClass.Set_Arg_Is_An_Numeric_Character(arg_string);
+                            if (is_num)
+                            {
+                                int arg_int = commandClass.Convert_Argument_To_Int(arg_string);
+                                dictUserGameData["maximum_question"] = arg_int;
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                if (arg_int != 0)
+                                {
+                                    Console.WriteLine("Nombre de question changait à {0}", arg_int);
+                                } else {
+                                    Console.WriteLine("Nombre de maximum de question mit à l'infit");
+                                }
+                                Console.ReadKey();
+                            } else {
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("Votre argument n'est pas valide.");
+                                Console.ReadKey();
+                            }
+                        } else {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("Veuillez préciser un argument.");
+                            Console.ReadKey();
+                        }
+
                     } else if (quizz.doesUserPlay){
                         //Play Commande
+                        Console.WriteLine("cmd :{0} | cmd == stop : | ", command, (command == listCommand[3]), listCommand[3]);
+                        Console.ReadKey();
                         quizz.CheckAnswer(command);
-                        if (command == listCommand[3]) {
-                            quizz.StopGame();
-                        } else if (command == quizz.answer) {
+                        if (command == quizz.answer) {
                             Console.WriteLine("Bravo!");
+                            if (dictUserGameData["maximum_question"] == 0 || dictUserGameData["index_question"] > 0)
+                            {
+                                quizz.SetWord();
+                                if (dictUserGameData["index_question"] > 0)
+                                {
+                                    dictUserGameData["index_question"] -= 1;
+                                } else if (dictUserGameData["maximum_question"] != 0) {
+                                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                                    Console.WriteLine("Partie finit!");
+                                    Console.ReadKey();
+                                }
+                            }
                         } else {
                             Console.WriteLine("Oops!");
                         }
                         Console.ReadLine();
-                        // Console.Clear();
                     } else if (command == listCommand[2]) {
                         quizz.StartGame();
                     } else if (command.Contains(commandHelp)) {
@@ -161,6 +207,16 @@ namespace Hugo
             } else {
                 Console.WriteLine("Désolé, mais les commandes n'ont pas chargaient...");
             }
+        }
+
+        static void Set_DictGameUserData()
+        {
+            /* 
+                Defines dictUserGameData
+            */
+            dictUserGameData.Add("maximum_question", 0); //0 means inifnite
+            dictUserGameData.Add("index_question", 0);
+
         }
 
         static string GetArgument(string cmd)

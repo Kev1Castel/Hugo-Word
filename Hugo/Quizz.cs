@@ -62,7 +62,7 @@ namespace Hugo
         }
 
 
-        private void SetWord()
+        public void SetWord()
         {
             /*
             This method is used for set word for the game
