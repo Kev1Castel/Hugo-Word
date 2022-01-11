@@ -6,4 +6,5 @@
     <commande_arreter>stop</commande_arreter>
 	<commande_ajouter>ajouter</commande_ajouter>
     <commande_remove>remove</commande_remove>
+    <commande_option>option</commande_option>
 </commande>
