@@ -50,13 +50,15 @@ namespace Hugo
             if (doesInputIsRight)
             {
                 this.pointWon++;
+                this.tryed = 2;
                 this.SetWord();
-            } else if (this.tryed == 3) {
-                this.tryed = 0;
+            } else if (this.tryed == 0) {
+                this.tryed = 3;
+                Console.WriteLine("Encore {0} essais sur cette question! Le mot était:{1}", this.tryed, this.answer);
                 this.SetWord();
-                Console.WriteLine("Encore {0} essais sur cette question!", this.tryed);
             } else {
-                this.tryed++;
+                Console.WriteLine("Encore {0} essais sur cette question!", this.tryed);
+                this.tryed--;
                 this.pointLoss++;
             }         
         }
@@ -130,7 +132,7 @@ namespace Hugo
             this.doesUserPlay = true;
             this.pointWon = 0;
             this.pointLoss = 0;
-            this.tryed = 0;
+            this.tryed = 2;
             Console.WriteLine("");
             this.SetWord();
         }

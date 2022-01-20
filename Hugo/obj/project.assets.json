@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\projet\\C#\\Hugo\\Hugo.csproj",
-      "projectName": "Hugo",
-      "projectPath": "D:\\projet\\C#\\Hugo\\Hugo.csproj",
+      "projectUniqueName": "D:\\projet\\C#\\Accentuation Trainning\\Accentuation Trainning.csproj",
+      "projectName": "Accentuation Trainning",
+      "projectPath": "D:\\projet\\C#\\Accentuation Trainning\\Accentuation Trainning.csproj",
       "packagesPath": "C:\\Users\\SCHNEIDER\\.nuget\\packages\\",
-      "outputPath": "D:\\projet\\C#\\Hugo\\obj\\",
+      "outputPath": "D:\\projet\\C#\\Accentuation Trainning\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\SCHNEIDER\\AppData\\Roaming\\NuGet\\NuGet.Config"

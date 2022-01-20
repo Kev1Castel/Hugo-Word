@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <word>
   <deja>"déjà"</deja>
   <s-il-vous-plait>"s'il vous plaît"</s-il-vous-plait>
@@ -35,4 +35,10 @@
   <poele>"poêle"</poele>
   <poeme>"poème"</poeme>
   <exigue>"exiguë"</exigue>
+  <hui>"hui"</hui>
+  <merde>"mérde"</merde>
+  <boote>"booté</boote>
+  <test>"tést"</test>
+  <hi>"hi"</hi>
+  <hie>"hié"</hie>
 </word>

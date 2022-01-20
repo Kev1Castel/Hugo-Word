@@ -1,0 +1,15 @@
+D:\projet\C#\Accentuation Trainning\bin\Debug\net6.0\Accentuation Trainning.exe
+D:\projet\C#\Accentuation Trainning\bin\Debug\net6.0\Accentuation Trainning.deps.json
+D:\projet\C#\Accentuation Trainning\bin\Debug\net6.0\Accentuation Trainning.runtimeconfig.json
+D:\projet\C#\Accentuation Trainning\bin\Debug\net6.0\Accentuation Trainning.dll
+D:\projet\C#\Accentuation Trainning\bin\Debug\net6.0\ref\Accentuation Trainning.dll
+D:\projet\C#\Accentuation Trainning\bin\Debug\net6.0\Accentuation Trainning.pdb
+D:\projet\C#\Accentuation Trainning\obj\Debug\net6.0\Accentuation Trainning.csproj.AssemblyReference.cache
+D:\projet\C#\Accentuation Trainning\obj\Debug\net6.0\Accentuation Trainning.GeneratedMSBuildEditorConfig.editorconfig
+D:\projet\C#\Accentuation Trainning\obj\Debug\net6.0\Accentuation Trainning.AssemblyInfoInputs.cache
+D:\projet\C#\Accentuation Trainning\obj\Debug\net6.0\Accentuation Trainning.AssemblyInfo.cs
+D:\projet\C#\Accentuation Trainning\obj\Debug\net6.0\Accentuation Trainning.csproj.CoreCompileInputs.cache
+D:\projet\C#\Accentuation Trainning\obj\Debug\net6.0\Accentuation Trainning.dll
+D:\projet\C#\Accentuation Trainning\obj\Debug\net6.0\ref\Accentuation Trainning.dll
+D:\projet\C#\Accentuation Trainning\obj\Debug\net6.0\Accentuation Trainning.pdb
+D:\projet\C#\Accentuation Trainning\obj\Debug\net6.0\Accentuation Trainning.genruntimeconfig.cache

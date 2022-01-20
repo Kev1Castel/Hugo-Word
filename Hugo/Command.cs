@@ -90,7 +90,20 @@ namespace Hugo
 
         }
 
-        public string Get_Argument(string cmd)
+        // public string GetArgumentGame()
+        // {
+        //     /*
+        //     Obtains the number passed as argument in the "option" command.
+            
+        //     Return:
+        //         string questionMaximum wich is the new number maximum of quesiton
+        //     */
+            
+        //     string questionMaximum;
+        //     return questionMaximum;
+        // }
+
+        public string GetArgument(string cmd, string commandParent)
         {
             /*
                 Get the argument in the string c for returning 
@@ -99,14 +112,18 @@ namespace Hugo
                 ARG:
                     string cmd
             */
-            string a = null;
-            if (cmd.Contains("option"))
-                a = cmd.Replace("option", "");
+            string a = cmd;
+            if (a.Contains(commandParent))
+                a = a.Replace(commandParent, "");
             a = a.Replace(" ", "");
+            if (a.Contains("--"))
+            {
+                a = a.Replace("--","");
+            }
             return a;
         }
 
-        public bool Set_Arg_Is_An_Numeric_Character(string arg)
+        public bool SetArgIsAnNumericCharacter(string arg)
         {
             /*
                 Check if the argument (arg) is numeric
@@ -146,7 +163,7 @@ namespace Hugo
             return listC;
         }
 
-        public int Convert_Argument_To_Int(string arg)
+        public int ConvertStringToInt(string arg)
         {
             /*
                 Convert string argument to int argument
@@ -198,6 +215,117 @@ namespace Hugo
                 listWrongCharactersFoundt.Add(character);
             }
             return doesWrongCharacterWasFoundt;
+        }
+
+        public bool CheckHelpCommand(string cmd, List<string> listSubCommand)
+        {
+            /*
+            Check if the command used the right format
+            
+            Take Args:
+                string cmd wich is the input
+                listSubCommand is an string List of child command wich can
+                    be used as argument with the help command 
+            */
+            bool isFormatCommandValid;
+            Dictionary<string, bool> dictFormatCommand = new Dictionary<string, bool>();
+            dictFormatCommand.Add("isHelpCommandValids", false);
+            dictFormatCommand.Add("isSubCommandValids", false);
+            dictFormatCommand.Add("doesCmdContainsPrefix", false);
+            List<string> listCharactersCmd = new List<string>();
+            int countSpace = 0;
+            string word;
+            string wordWithoutPrefix;
+            cmd += " ";
+
+            foreach(char c in cmd)
+            {
+                string c_string = c.ToString();
+                listCharactersCmd.Add(c_string);
+                word = GetWord(listCharactersCmd);
+                if (c_string == " ")
+                {
+                    string wordWithoutSpace = word.Replace(" ", "");
+                    if (countSpace == 0 && wordWithoutSpace == "aide"){
+                        dictFormatCommand["isHelpCommandValids"] = true;
+                    } else if (countSpace == 1)
+                    {
+                        if (word.Contains("--"))
+                        {
+                            wordWithoutPrefix = word.Replace("--","");
+                            wordWithoutPrefix = wordWithoutPrefix.Replace(" ","");
+                            dictFormatCommand["doesCmdContainsPrefix"] = true;
+                            if (listSubCommand.Contains(wordWithoutPrefix))
+                            {
+                                dictFormatCommand["isSubCommandValids"] = true;
+                            }
+                        }
+
+                    }
+                    countSpace ++;
+                    listCharactersCmd.Clear();
+                }
+            }            
+            isFormatCommandValid = true;
+            foreach(bool check in dictFormatCommand.Values)
+            {
+                if (check == false)
+                {
+                    isFormatCommandValid = false;
+                }
+
+            }
+            return isFormatCommandValid;
+        }
+
+        public string GetSubHelpCommand(string cmd)
+        {
+            /*
+                Obtains the sub command when help command is called.
+                This is for getting help for an command targeted.
+
+                Take Args:
+                    string cmd wich is the command that contain information
+                        about the help called.
+
+                Return:
+                    string subCommand
+            */
+            string subCommand = "";
+            if (cmd.Contains("aide"))
+            {
+                subCommand = cmd.Replace("aide", "");
+            }
+            if (cmd.Contains("--")){
+                subCommand = subCommand.Replace("--", "");
+            }
+            if (cmd.Contains(" "))
+            {
+                subCommand = subCommand.Replace(" ", "");
+            }
+            return subCommand;
+        }
+
+        private string GetWord(List<string> listCharacters)
+        {
+            /*
+            Return data contained in listCharacter (arg) to string
+            So aswell it convert list<string> to string
+
+            Args:
+                listCharacters
+
+            Return:
+                string word
+
+
+            */
+            string word = "";
+            foreach(string character in listCharacters)
+            {
+                word += character;
+            }
+            return word;
         }
 
         public bool GetIsCommandRight()
